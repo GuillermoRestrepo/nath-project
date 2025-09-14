@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Tareas</h1>
+    <table>
+        <thead>
+            <th>Tarea</th>
+            <th>Prioridad</th>
+            <th>Creación</th>
+            <th>Estado</th>
+        </thead>
+        {% for task2 in tasks %}
+            <tr>
+                <td>
+                    <a href= "{% url 'task_detail' task2.id %}">
+                        {{task2.title}}
+                    </a>
+                </td>
+                <td>
+                    {% if task2.importand == True %}
+                        Alta
+                    {% else %}
+                        Baja
+                    {% endif %}
+                </td>
+                <td>{{task2.created|date:'j/m/Y - h:i'}}</td>
+                <td>
+                    {% if task2.completed != Null %}
+                        Completada:<br>
+                        {{task2.completed|date:'j/m/Y - h:i'}}
+                    {% else %}
+                        Pendiente
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
